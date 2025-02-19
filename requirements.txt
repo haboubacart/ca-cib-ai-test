@@ -5,3 +5,5 @@ langchain-huggingface==0.1.2
 sentence-transformers==3.4.1
 transformers==4.49.0
 faiss-cpu==1.10.0
+streamlit==1.42.1
+docx2txt==0.8

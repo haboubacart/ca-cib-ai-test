@@ -4,7 +4,10 @@ from transformers import AutoTokenizer, AutoModelForTokenClassification, pipelin
 def read_text_file(file_path):
     with open(file_path, "r", encoding="utf-8") as file:
         return file.read()
-    
+
+def st_read_text_file(uploaded_file):
+    return uploaded_file.getvalue().decode("utf-8")
+
 def model_loader(model_path) :
     tokenizer = AutoTokenizer.from_pretrained(model_path)
     model = AutoModelForTokenClassification.from_pretrained(model_path)

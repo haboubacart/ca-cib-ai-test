@@ -1,11 +1,23 @@
 from langchain_community.document_loaders import Docx2txtLoader
+import docx2txt
 from transformers import pipeline
 import re
 import json
+import tempfile
+
 
 #Lire un fichier docx et extraire son texte.
 def extract_text_from_docx(docx_path):
     data  = Docx2txtLoader(docx_path).load()
+    return data[0].page_content.strip()
+
+#Lire un fichier docx et extraire son texte : version streamlit
+def st_extract_text_from_docx(uploaded_file):   
+    # Create a temporary file
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".docx") as tmp_file:
+        tmp_file.write(uploaded_file.read())  # Write uploaded content to temp file
+        tmp_file_path = tmp_file.name  # Get temp file path
+    data = Docx2txtLoader(tmp_file_path).load()
     return data[0].page_content.strip()
 
 #Génèrer les regex à des noms d'entités qu'on souhaite extraire
