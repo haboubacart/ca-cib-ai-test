@@ -48,5 +48,3 @@ Move to the root directory of the project and Run:
 streamlit run app.py
 ```
 ---
-
-🚀 **The goal: an optimized model to accurately extract financial entities!**
