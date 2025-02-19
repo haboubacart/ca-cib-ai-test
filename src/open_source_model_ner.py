@@ -1,6 +1,5 @@
 from transformers import AutoTokenizer, AutoModelForTokenClassification, pipeline
-import warnings
-warnings.simplefilter(action='ignore', category=FutureWarning)
+
 
 def read_text_file(file_path):
     with open(file_path, "r", encoding="utf-8") as file:
