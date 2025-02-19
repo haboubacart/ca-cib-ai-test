@@ -1,19 +1,9 @@
 from langchain_community.vectorstores import FAISS
-from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 import ollama
 import json
 import re
-
-model_path = "../pretrained-models/all-MiniLM-L6-v2"
-model_kwargs = {'device': 'cpu'}
-encode_kwargs = {'normalize_embeddings': False}
-embedding_model = HuggingFaceEmbeddings(
-    model_name=model_path,
-    model_kwargs=model_kwargs,
-    encode_kwargs=encode_kwargs
-)
 
 
 def load_pdf(file_path):
@@ -27,22 +17,24 @@ def load_pdf(file_path):
             chunks.extend(text_splitter.split_text(re.sub(r'\s+', ' ', text).strip() ))
     return chunks
 
+
+
 def index_documents(list_chunks, embedding_model, index_path) : 
     print("starting indexation in FAISS")
     store = FAISS.from_texts(list_chunks, embedding_model)
     store.save_local(index_path)
     print("indexation terminated")
 
-def retrrieve_relevant_data(retriever, query) :
+
+
+def retrieve_relevant_data(retriever, query) :
     results = retriever.similarity_search(query, k=4)
-    print(results, '\n\n')
     source_knowledge = "\n".join([x.page_content for x in results])
     return source_knowledge
 
 
-
 def extract_named_entities(text, model='mistral') :   
-    print('NER starting')
+    print('NER performing')
     prompt = f"""
     Identify the **financial named entities** in the following text.
     Extract only relevant financial entities and return a valid JSON object with:
@@ -72,27 +64,3 @@ def extract_named_entities(text, model='mistral') :
     print('NER finished')
     return json.loads(response["message"]["content"])
     
-
-
-if __name__ == "__main__" :
-  ######## Indexation #########
-  index_path = "../faiss-index"
-  chunks = load_pdf("../data/BankABC_TermSheet_Template.pdf")
-  index_documents(chunks, embedding_model, index_path)
-
-  print('\n\n')
-
-  ######## Retrieving #########
-  retriever = FAISS.load_local(index_path, embedding_model, allow_dangerous_deserialization=True)
-  query = """Consent of the Investor shall be required for any action that 
-            (i) alters or changes the rights, preference or privileges of the 
-            Preference Shares, (ii) increases or decreases the authorized 
-            number of shares of equity or Preference Shares"""
-  aggragated_retrieved_text = retrrieve_relevant_data(retriever, query)
-  print(aggragated_retrieved_text)
-
-  print('\n\n')
-
-  ######## Retrieving #########
-  entities = extract_named_entities(aggragated_retrieved_text)
-  print(json.dumps(entities, indent=2, ensure_ascii=False))
