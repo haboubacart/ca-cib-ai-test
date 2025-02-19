@@ -1,7 +1,7 @@
 ### L'application
-L'application AUGMENTED DOCUMENT READER dispose d'une interface graphique (streamlit) via laquelle l'utilisateur peut réaliser l'extraction d'entités nommées, à partir de fichier.
+L'application **AUGMENTED DOCUMENT READER** dispose d'une interface graphique (streamlit) via laquelle l'utilisateur peut réaliser l'extraction d'entités nommées, à partir de fichier.
 Deux formats sont acceptés : txt et docx. L'utilisateur upload un fichier de son choix et aussitôt est déclenché l'algorithme de NER adapté. Le résultat est rendu sous format json.
-L'ensemble des différents types de NER proposés sont testés diretement dans le notebook named_entity_recognation.ipynb, à savoir : rules based NER, open source model based NER et LLM/RAG based NER. Pour le dernier type, j'ai implémenté un RAG en utilisant langchain, FAISS et Mistral comme LLM via ollama en local.
+L'ensemble des différents types de NER proposés sont testés diretement dans le notebook named_entity_recognation.ipynb, à savoir : rules based NER, open source model based NER et LLM/RAG based NER. Pour le dernier type, j'ai implémenté un RAG en utilisant **langchain, FAISS et Mistral comme LLM via ollama** en local.
 
 #### L'App NER :
 ![L'App NER](src/images/app.png)
