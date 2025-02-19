@@ -6,10 +6,8 @@ from src.open_source_model_ner import (model_loader,
 
 
 from src.rules_based_ner import  (extract_entities_rules_based,
-                                  st_extract_text_from_docx,
-                                  extract_text_from_docx)
+                                  st_extract_text_from_docx)
 
-embedding_model_path = "pretrained-models/all-MiniLM-L6-v2"
 ner_model_path = "./pretrained-models/distilbert-NER"
 ner_pipeline = model_loader(ner_model_path)
 
@@ -17,12 +15,11 @@ ner_pipeline = model_loader(ner_model_path)
 
 # Streamlit App
 st.set_page_config(page_title="NER App", page_icon="📄")
-st.image("./data/logo2.png", width=500)
+st.image("./src/images/logo.png", width=500)
 st.title("CMI · ADOR - NER APP")
-st.write("Upload a TXT or DOCX file to extract named entities.")
 
 # File uploader
-uploaded_file = st.file_uploader("Upload a file", type=["txt", "docx"])
+uploaded_file = st.file_uploader("Upload a TXT or DOCX file to extract named entities.", type=["txt", "docx"])
 
 if uploaded_file:
     file_type = uploaded_file.name.split(".")[-1]
