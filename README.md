@@ -35,14 +35,14 @@ You can **fine-tune** a pre-trained NER model on your own financial data.
 - Choose a **pre-trained NER model** (e.g., Hugging Face).  
 - Train only the **classification head** while **freezing** the early layers of the model.  
 
-## **🚀 How to Run the Application**
+## **🚀 How to Run the APP**
 #### Install Dependencies**
 Before running the app, install all required dependencies using:
 ```bash
 pip install -r requirements.txt
 ```
 
-#### Launch the Streamlit App**
+#### Launch the ST App**
 Move to the root directory of the project and Run:
 ```bash
 streamlit run app.py
