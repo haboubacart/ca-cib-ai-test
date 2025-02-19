@@ -1,8 +1,5 @@
 from langchain_community.document_loaders import Docx2txtLoader
-import docx2txt
-from transformers import pipeline
 import re
-import json
 import tempfile
 
 
