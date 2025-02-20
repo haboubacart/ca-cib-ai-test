@@ -40,6 +40,18 @@ Before running the app, install all required dependencies using:
 ```bash
 pip install -r requirements.txt
 ```
+Download the two models from hugging face and place them in the folder `pretrained-models` in the root directory :
+```bash
+git clone https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2
+```
+and 
+
+```bash
+git clone https://huggingface.co/dslim/distilbert-NER 
+```
+The two models are : 
+`distilbert-NER` for NER and  `all-MiniLM-L6-v2` for  Embedding
+
 Move to the root directory of the project and Run:
 ```bash
 streamlit run app.py
