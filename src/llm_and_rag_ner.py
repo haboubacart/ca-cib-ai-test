@@ -5,7 +5,7 @@ import ollama
 import json
 import re
 
-
+#Extraire et découper en chunk le text du fichier pdf
 def load_pdf(file_path):
     loader = PyPDFLoader(file_path)
     docs = loader.load()
@@ -18,7 +18,7 @@ def load_pdf(file_path):
     return chunks
 
 
-
+#Indexer la liste des chunks issus d'un pdf dans FAISS
 def index_documents(list_chunks, embedding_model, index_path) : 
     print("starting indexation in FAISS")
     store = FAISS.from_texts(list_chunks, embedding_model)
@@ -26,16 +26,17 @@ def index_documents(list_chunks, embedding_model, index_path) :
     print("indexation terminated")
 
 
-
+#Retriver pour récuperer des parties du pdf afférentes à une query
 def retrieve_relevant_data(retriever, query) :
     results = retriever.similarity_search(query, k=4)
     source_knowledge = "\n".join([x.page_content for x in results])
     return source_knowledge
 
-
+#Appel LLM(mistral par défaut) pour réaliser la NER
 def extract_named_entities(text, model='mistral') :   
     print('NER performing')
     prompt = f"""
+    Your are expert in performing NER : Named Entity Recognation from a given text.
     Identify the **financial named entities** in the following text.
     Extract only relevant financial entities and return a valid JSON object with:
     - "ORG": Financial organizations (banks, investment firms)
