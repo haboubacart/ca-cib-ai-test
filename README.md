@@ -10,7 +10,14 @@ The different types of NER implemented are **tested directly in the notebook** `
 - **Open Source Model-Based NER** (using pre-trained models)
 - **LLM/RAG-Based NER** (leveraging a language model and a retrieval-augmented system)
 
-For **LLM/RAG-Based NER**, I implemented a **RAG system** using **Langchain, FAISS, and Mistral (via Ollama)** locally.
+For **LLM/RAG-Based NER**, I implemented a **RAG system** using **Langchain, FAISS, and Mistral (via Ollama)** locally.  
+The **RAG (Retrieval-Augmented Generation)** approach is particularly useful for **long and complex documents** because it allows the system to **extract only the most relevant sections** before passing them to the LLM for Named Entity Recognition (NER).  
+
+This method helps to:  
+- **Reduce noise** in the input, ensuring the model focuses on key information.  
+- **Improve accuracy** by providing the LLM with highly relevant context.  
+- **Optimize processing efficiency**, as the model does not need to analyze entire documents at once.  
+
 
 ## **🔹 The NER App:**
 ![The NER App](src/images/app.png)
@@ -50,7 +57,7 @@ and
 git clone https://huggingface.co/dslim/distilbert-NER 
 ```
 The two models are : 
-`distilbert-NER` for NER and  `all-MiniLM-L6-v2` for  Embedding
+`distilbert-NER` for NER and  `all-MiniLM-L6-v2` for  Embedding used in the RAG pipeline
 
 Move to the root directory of the project and Run:
 ```bash
