@@ -43,10 +43,6 @@ You can **fine-tune** a pre-trained NER model on your own financial data.
 - Train only the **classification head** while **freezing** the early layers of the model.  
 
 ## **🚀 How to Run the APP**
-Before running the app, install all required dependencies using:
-```bash
-pip install -r requirements.txt
-```
 Download the two models from hugging face and place them in the folder `pretrained-models` in the root directory :
 ```bash
 git clone https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2
@@ -58,6 +54,11 @@ git clone https://huggingface.co/dslim/distilbert-NER
 ```
 The two models are : 
 `distilbert-NER` for NER and  `all-MiniLM-L6-v2` for  Embedding used in the RAG pipeline
+
+Before running the app, install all required dependencies using:
+```bash
+pip install -r requirements.txt
+```
 
 Move to the root directory of the project and Run:
 ```bash
